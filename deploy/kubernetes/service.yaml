@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cross-validation
+  labels:
+    app: cross-validation
+spec:
+  type: ClusterIP
+  selector:
+    app: cross-validation
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080

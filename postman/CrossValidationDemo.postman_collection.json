@@ -1,0 +1,197 @@
+{
+  "info": {
+    "name": "CrossValidationDemo",
+    "description": "RFID + CCTV 交叉验证后端接口集合",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "tagId",
+      "value": "RFID-1001",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "health"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "RFID Event - Enter",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tag_id\": \"RFID-1001\",\n  \"device_id\": \"gate-a-01\",\n  \"gate_id\": \"gate-A\",\n  \"zone_id\": \"zone-1\",\n  \"antenna_id\": \"antenna-02\",\n  \"event_type\": \"enter\",\n  \"timestamp\": \"2026-10-12T10:00:00Z\",\n  \"signal_strength\": 78.2,\n  \"confidence\": 0.96\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/rfid-events",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "rfid-events"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "RFID Event - Exit",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tag_id\": \"RFID-1001\",\n  \"device_id\": \"gate-a-01\",\n  \"gate_id\": \"gate-A\",\n  \"zone_id\": \"zone-1\",\n  \"event_type\": \"exit\",\n  \"timestamp\": \"2026-10-12T10:10:00Z\",\n  \"signal_strength\": 82.1,\n  \"confidence\": 0.94\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/rfid-events",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "rfid-events"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CCTV Event - In",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"camera_id\": \"cam-01\",\n  \"channel_id\": \"channel-01\",\n  \"track_id\": \"track-77\",\n  \"target_type\": \"person\",\n  \"object_id\": \"obj-77\",\n  \"zone_id\": \"zone-1\",\n  \"direction\": \"in\",\n  \"timestamp\": \"2026-10-12T10:00:02Z\",\n  \"confidence\": 0.93\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/cctv-events",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "cctv-events"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CCTV Event - Out",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"camera_id\": \"cam-01\",\n  \"channel_id\": \"channel-01\",\n  \"track_id\": \"track-77\",\n  \"target_type\": \"person\",\n  \"object_id\": \"obj-77\",\n  \"zone_id\": \"zone-1\",\n  \"direction\": \"out\",\n  \"timestamp\": \"2026-10-12T10:10:03Z\",\n  \"confidence\": 0.91\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/cctv-events",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "cctv-events"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Validate RFID by Tag",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tag_id\": \"{{tagId}}\",\n  \"window_seconds\": 10\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/validate",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "validate"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Query Alerts",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/alerts",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "alerts"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

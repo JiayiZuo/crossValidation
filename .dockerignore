@@ -1,0 +1,16 @@
+**/.git
+**/.github
+**/.vscode
+**/node_modules
+**/bin
+**/tmp
+**/dist
+**/.idea
+**/.DS_Store
+*.md
+!README.md
+Dockerfile
+
+docker-compose*.yml
+**/.env
+**/*.log
